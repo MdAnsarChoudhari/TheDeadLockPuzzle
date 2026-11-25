@@ -1,0 +1,354 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-page: #0C0F14;
+    --bg-tray-outer: #181D26;
+    --bg-tray-inner: #11151D;
+    --border-tray: rgba(255, 255, 255, 0.09);
+    --border-subtle: rgba(255, 255, 255, 0.12);
+    --text-primary: #F3F4F6;
+    --text-secondary: #9CA3AF;
+    --text-tertiary: #6B7280;
+  }
+
+  body {
+    background: radial-gradient(circle at 50% 12%, #1C2330 0%, #0F131A 45%, #080A0E 100%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    user-select: none;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+}
+
+/* Custom Sleek Scrollbar for Board Overflow */
+.board-scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+}
+
+.board-scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.board-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.board-scroll-container::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+.board-scroll-container::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.28);
+}
+
+/* 3D Elevated Outer Tray Frame */
+.studio-tray-outer {
+  background: linear-gradient(180deg, #222A36 0%, #161B23 40%, #12161D 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 44px;
+  box-shadow: 
+    0 32px 70px -15px rgba(0, 0, 0, 0.95),
+    0 12px 28px -6px rgba(0, 0, 0, 0.8),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.6);
+  padding: 16px;
+}
+
+/* 3D Sunken Inner Track Tray */
+.studio-tray-inner {
+  position: relative;
+  background: radial-gradient(ellipse at 50% 30%, #171C25 0%, #10141C 75%, #0D1016 100%);
+  border-radius: 34px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  box-shadow: 
+    inset 0 10px 25px rgba(0, 0, 0, 0.9),
+    inset 0 2px 6px rgba(0, 0, 0, 0.7),
+    0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Dashed Racetrack Highway Border */
+.racetrack-track {
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 20px;
+  right: 20px;
+  border-radius: 28px;
+  border: 2px dashed rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+}
+
+/* Metallic Rivet / Stud Grommet along track */
+.track-stud {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 35%, #2C3545 0%, #161B22 70%, #0D1015 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Vertical Slot Bay (Sunken Rounded Rect) */
+.bay-slot {
+  position: relative;
+  border-radius: 18px;
+  background: #090B0F;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 
+    inset 0 6px 14px rgba(0, 0, 0, 0.95),
+    inset 0 1px 3px rgba(0, 0, 0, 0.8),
+    0 1px 1px rgba(255, 255, 255, 0.03);
+  transition: all 0.22s ease;
+  flex-shrink: 0;
+}
+
+/* Illuminated Floor in the Empty Open Slot */
+.bay-slot-illuminated {
+  background: radial-gradient(circle at 50% 50%, #FAF6EE 0%, #E8DFD1 45%, #C2B4A1 85%, #8B7A66 100%);
+  border: 1px solid rgba(255, 245, 230, 0.35);
+  box-shadow: 
+    0 0 28px 4px rgba(255, 245, 225, 0.35),
+    0 0 50px 10px rgba(255, 240, 215, 0.15),
+    inset 0 2px 5px rgba(255, 255, 255, 0.7),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.25);
+  animation: pulse-soft 3s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-soft {
+  0% {
+    box-shadow: 0 0 24px 3px rgba(255, 245, 225, 0.3), inset 0 2px 5px rgba(255, 255, 255, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 34px 6px rgba(255, 245, 225, 0.45), inset 0 2px 5px rgba(255, 255, 255, 0.85);
+  }
+}
+
+/* Vertical Car Piece Movement & Hover States */
+.piece-btn {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.22s cubic-bezier(0.34, 1.4, 0.64, 1), filter 0.2s ease;
+}
+
+.piece-btn.movable {
+  cursor: pointer;
+}
+
+.piece-btn.movable:hover {
+  transform: translateY(-5px) scale(1.03);
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.75)) brightness(1.08);
+}
+
+.piece-btn.movable:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.piece-btn.immovable {
+  cursor: default;
+  opacity: 0.92;
+}
+
+.piece-btn.immovable:hover {
+  transform: none;
+}
+
+/* Capsule Pill Buttons (Undo, Reset, Par, Moves) */
+.capsule-btn {
+  background: rgba(22, 27, 34, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #F3F4F6;
+  border-radius: 9999px;
+  padding: 0.55rem 1.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.18s ease;
+}
+
+.capsule-btn:hover:not(:disabled) {
+  background: rgba(30, 37, 47, 0.95);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.capsule-btn:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.capsule-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Circular Icon Pill */
+.icon-pill {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  background: rgba(22, 27, 34, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #D1D5DB;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: all 0.18s ease;
+}
+
+.icon-pill:hover {
+  background: rgba(30, 37, 47, 0.95);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+/* Custom Select Dropdown matching image */
+.custom-select {
+  appearance: none;
+  background-color: #12161E;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #F3F4F6;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.45rem 2.25rem 0.45rem 0.85rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239CA3AF'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  transition: all 0.18s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.custom-select:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  background-color: #181E29;
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.custom-select option {
+  background-color: #12161E;
+  color: #F3F4F6;
+  padding: 8px;
+}
+
+/* Gentle shake animation */
+@keyframes soft-shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+.animate-soft-shake {
+  animation: soft-shake 0.36s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* ================= Developed By page ================= */
+.credits-card {
+  background: rgba(22, 27, 34, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.5rem;
+  padding: 1.25rem 1.25rem 1.5rem;
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.9), inset 0 1px 1px rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .credits-card {
+    padding: 1.75rem 1.75rem 2rem;
+  }
+}
+
+.credits-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #F3F4F6;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ================= Mobile adaptability ================= */
+@media (max-width: 640px) {
+  .studio-tray-outer {
+    padding: 10px;
+    border-radius: 28px;
+  }
+
+  .studio-tray-inner {
+    border-radius: 22px;
+  }
+
+  .racetrack-track {
+    left: 12px;
+    right: 12px;
+    border-radius: 16px;
+  }
+
+  .capsule-btn {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .studio-tray-outer {
+    padding: 8px;
+    border-radius: 22px;
+  }
+
+  .studio-tray-inner {
+    border-radius: 18px;
+  }
+
+  .racetrack-track {
+    left: 9px;
+    right: 9px;
+    top: 10px;
+    bottom: 10px;
+  }
+
+  .track-stud {
+    width: 11px;
+    height: 11px;
+  }
+}
+
+/* Large boards (6v6 - 10v10) stay readable without clipping */
+@media (max-width: 640px) {
+  .bay-slot {
+    border-radius: 14px;
+  }
+}
